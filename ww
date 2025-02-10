@@ -153,6 +153,6 @@ local function updateUI()
 end
 
 while true do
-    wait(5)
+    wait(3)
     updateUI()
 end
