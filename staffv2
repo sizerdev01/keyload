@@ -1,0 +1,44 @@
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+-- Lista de nomes a serem monitorados
+local targetUsernames = {
+    "jake56839ad", "CleitinDoGrau_Eb", "21peteca", "Lucalarte", "SPTmatheus123",
+    "GuilhermeDRTgg", "Briessxz", "hardstyless", "Mundaka", "Isabelaaaaafofs",
+    "HANRLLEY25", "kaleb_iaee", "brunizoraa", "rip_propleyfran", "pepezicador",
+    "Jjhgul", "Dariosantos21048", "JEKER_2009", "tttonas", "MZPlug14k",
+    "Dudubeterotv5", "Sargento_admOficial", "Cassiopia84un", "Hakplays", "Cleo_ptr"
+}
+
+-- Converte a lista para uma tabela para verificação rápida
+local targetLookup = {}
+for _, name in ipairs(targetUsernames) do
+    targetLookup[name] = true
+end
+
+-- Inicializa a configuração global
+getgenv().KickCheck = getgenv().KickCheck or true
+
+-- Função para verificar e kickar caso necessário
+local function checkForTargetPlayers()
+    if not getgenv().KickCheck then return end
+
+    for _, player in pairs(Players:GetPlayers()) do
+        if targetLookup[player.Name] then
+            warn("Usuário indesejado detectado:", player.Name)
+            LocalPlayer:Kick("Um staff foi detectado no servidor.")
+            break
+        end
+    end
+end
+
+-- Verifica inicialmente
+checkForTargetPlayers()
+
+-- Verifica sempre que um novo jogador entrar
+Players.PlayerAdded:Connect(function(player)
+    if getgenv().KickCheck and targetLookup[player.Name] then
+        warn("Usuário indesejado detectado:", player.Name)
+        LocalPlayer:Kick("Um staff foi detectado no servidor.")
+    end
+end)
