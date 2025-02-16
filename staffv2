@@ -42,3 +42,4 @@ Players.PlayerAdded:Connect(function(player)
         LocalPlayer:Kick("Um staff foi detectado no servidor.")
     end
 end)
+print("check")
