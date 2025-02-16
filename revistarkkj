@@ -1,0 +1,18 @@
+local UserInputService = game:GetService("UserInputService")
+
+-- Configuração da tecla via getgenv (use no ambiente antes de executar)
+local key = getgenv().Key or Enum.KeyCode.R -- Tecla padrão: R
+
+-- Função para enviar a mensagem /revistar
+local function sendRevistarMessage()
+    local TextChatService = game:GetService("TextChatService")
+    local channel = TextChatService:WaitForChild("TextChannels"):WaitForChild("RBXGeneral")
+    channel:SendAsync("/revistar")
+end
+
+-- Listener para detectar teclas pressionadas
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if input.KeyCode == key and not gameProcessed then
+        sendRevistarMessage()
+    end
+end)
