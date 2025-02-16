@@ -1,7 +1,8 @@
 local UserInputService = game:GetService("UserInputService")
 
--- Configuração da tecla via getgenv (use no ambiente antes de executar)
-local key = getgenv().Key or Enum.KeyCode.R -- Tecla padrão: R
+-- Configurações via getgenv
+getgenv().Key = getgenv().Key or Enum.KeyCode.R -- Tecla padrão: R
+getgenv().Enabled = getgenv().Enabled or false -- Estado inicial: desativado
 
 -- Função para enviar a mensagem /revistar
 local function sendRevistarMessage()
@@ -12,7 +13,8 @@ end
 
 -- Listener para detectar teclas pressionadas
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
-    if input.KeyCode == key and not gameProcessed then
+    -- Verifica se o script está ativado e se a tecla correta foi pressionada
+    if getgenv().Enabled and input.KeyCode == getgenv().Key and not gameProcessed then
         sendRevistarMessage()
     end
 end)
