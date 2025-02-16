@@ -8,7 +8,7 @@ getgenv().Enabled = getgenv().Enabled or false -- Estado inicial: desativado
 local function sendRevistarMessage()
     local TextChatService = game:GetService("TextChatService")
     local channel = TextChatService:WaitForChild("TextChannels"):WaitForChild("RBXGeneral")
-    channel:SendAsync("/revistar")
+    channel:SendAsync("/revistar morto")
 end
 
 -- Listener para detectar teclas pressionadas
